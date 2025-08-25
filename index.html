@@ -4,25 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SoFo After Hours – Upptäck Klubbar & Barer</title>
-  <meta name="description" content="Guide till nattlivet på Södermalm för 18–30: klubbar, barer, öppettider, hur fullt det är under kvällen och tips på second hand-event." />
+  <meta name="description" content="Guide till nattlivet på Södermalm för 18–30: klubbar, barer, öppettider, trängsel och second hand-event." />
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
     <div class="nav-wrap">
       <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
+        <div class="logo"></div>
         <h1>SoFo After Hours</h1>
       </div>
-
-      <div class="filters" role="group" aria-label="Filter">
+      <div class="filters">
         <button class="chip active" data-filter="alla">Alla</button>
         <button class="chip" data-filter="klubb">Klubbar</button>
         <button class="chip" data-filter="bar">Barer</button>
       </div>
-
-      <label class="search" aria-label="Sök platser">
+      <label class="search">
         <input id="search" type="search" placeholder="Sök klubb eller bar..." />
       </label>
     </div>
@@ -31,35 +29,32 @@
   <main>
     <div class="section-title">
       <h2>Klubbar & Barer</h2>
-      <div class="muted">Trängsel vid <span id="timeLabel">22:00</span></div>
+      <div class="muted">Visa trängsel för kl. <span id="timeLabel">22:00</span></div>
     </div>
 
     <input id="time" type="range" min="17" max="27" step="1" value="22" />
     <small class="muted">Dra för att se ungefär hur mycket folk det brukar vara vid olika tider.</small>
 
-    <div id="grid" class="grid" aria-live="polite"></div>
+    <div id="grid" class="grid"></div>
 
-    <section class="events" aria-labelledby="eventsTitle">
-      <h2 id="eventsTitle">Second hand – Event & Popups</h2>
+    <section class="events">
+      <h2>Second hand – Event & Popups</h2>
       <p class="muted">Tips på kommande tillfällen att fynda runt Södermalm.</p>
       <div id="eventsList"></div>
     </section>
   </main>
 
-  <!-- Modal för kortinfo -->
-  <div id="modal" class="modal hidden">
+  <!-- Modal -->
+  <div id="modal" class="modal">
     <div class="modal-content">
       <span id="closeModal" class="close">&times;</span>
       <div id="modalBody"></div>
     </div>
   </div>
 
-  <footer>
-    <p>© 2025 SoFo After Hours – Din guide till nattlivet på Södermalm</p>
-  </footer>
-
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
