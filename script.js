@@ -6,7 +6,8 @@ const venues = [
     crowd: {17:1, 20:2, 22:4, 24:5, 26:3},
     img: "https://source.unsplash.com/400x300/?club,party",
     link: "https://marielaveau.se",
-    description: "Trendig klubb & bar på Hornsgatan med bra musik och dansgolv."
+    description: "Trendig klubb & bar på Hornsgatan.",
+    featured: true
   },
   {
     name: "Indigo",
@@ -33,15 +34,28 @@ const venues = [
     crowd: {17:2, 20:3, 22:4, 24:2},
     img: "https://source.unsplash.com/400x300/?beer,pub",
     link: "https://kvarnen.com",
-    description: "Anrik öl-hall och restaurang vid Medborgarplatsen."
+    description: "Anrik öl-hall vid Medborgarplatsen."
   }
+];
+
+// Second hand-event
+const events = [
+  { name: "SoFo Loppis", date: "Lör 14 sept", img: "https://source.unsplash.com/400x300/?flea-market" },
+  { name: "Beyond Retro Popup", date: "Fre 20 sept", img: "https://source.unsplash.com/400x300/?clothes,vintage" }
+];
+
+// Vintage shops
+const shops = [
+  { name: "Emmaus Vintage", address: "Peter Myndes Backe", img: "https://source.unsplash.com/400x300/?secondhand" },
+  { name: "Lisa Larsson Second Hand", address: "Bondegatan", img: "https://source.unsplash.com/400x300/?vintage,shop" },
+  { name: "Beyond Retro", address: "Brännkyrkagatan", img: "https://source.unsplash.com/400x300/?retro,fashion" }
 ];
 
 const grid = document.getElementById("grid");
 const timeSlider = document.getElementById("time");
 const timeLabel = document.getElementById("timeLabel");
 
-// Funktion för att formatera tid
+// Funktion för tid
 function formatTime(val) {
   let hour = parseInt(val);
   if (hour >= 24) hour = hour - 24;
@@ -57,7 +71,7 @@ function renderCards(filter = "alla", search = "") {
     v.name.toLowerCase().includes(search.toLowerCase())
   ).forEach(v => {
     const card = document.createElement("div");
-    card.className = "card";
+    card.className = v.featured ? "card featured" : "card";
     card.innerHTML = `
       <img src="${v.img}" alt="${v.name}" />
       <h3>${v.name}</h3>
@@ -72,11 +86,37 @@ function renderCards(filter = "alla", search = "") {
     btn.addEventListener("click", e => {
       const link = e.target.getAttribute("data-link");
       window.open(link, "_blank");
-      // Här kan du även lägga in tracking: t.ex. GA event
     });
   });
 }
 
+// Event-lista
+const eventsList = document.getElementById("eventsList");
+events.forEach(ev => {
+  const card = document.createElement("div");
+  card.className = "event-card";
+  card.innerHTML = `
+    <img src="${ev.img}" alt="${ev.name}" />
+    <h3>${ev.name}</h3>
+    <p>${ev.date}</p>
+  `;
+  eventsList.appendChild(card);
+});
+
+// Shop-lista
+const shopsList = document.getElementById("shopsList");
+shops.forEach(s => {
+  const card = document.createElement("div");
+  card.className = "shop-card";
+  card.innerHTML = `
+    <img src="${s.img}" alt="${s.name}" />
+    <h3>${s.name}</h3>
+    <p>${s.address}</p>
+  `;
+  shopsList.appendChild(card);
+});
+
+// Filter, sök, slider
 timeSlider.addEventListener("input", () => {
   timeLabel.textContent = formatTime(timeSlider.value);
   renderCards();
@@ -97,5 +137,3 @@ document.getElementById("search").addEventListener("input", e => {
 
 renderCards();
 timeLabel.textContent = formatTime(timeSlider.value);
-
-
