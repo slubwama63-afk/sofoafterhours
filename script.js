@@ -1,25 +1,58 @@
-// Exempeldata för klubbar & barer
+// Hjälpfunktion för tidformat
+function formatHour(value) {
+  if (value >= 24) return `${value - 24}:00`; // 24 = 0
+  return `${value}:00`;
+}
+
+// Exempeldata för Södermalm-ställen
 const venues = [
   {
     name: "Marie Laveau",
     type: "klubb",
     hours: "18.00 – 03.00",
     info: "En klassiker på Söder med bar, dansgolv och restaurang.",
-    crowd: {17:1, 20:2, 22:4, 01:5}
+    crowd: {17:1, 20:2, 22:4, 25:5}, // 25 = 01
+    img: "https://source.unsplash.com/400x300/?club"
   },
   {
     name: "Indigo",
     type: "bar",
     hours: "17.00 – 02.00",
     info: "Populär bar med avslappnad stämning, perfekt för AW.",
-    crowd: {17:1, 20:3, 22:4, 01:2}
+    crowd: {17:1, 20:3, 22:4, 25:2},
+    img: "https://source.unsplash.com/400x300/?bar"
   },
   {
     name: "Häktet",
     type: "bar",
     hours: "17.00 – 03.00",
     info: "Trendigt ställe med flera barer och DJs under helgen.",
-    crowd: {17:2, 20:3, 22:5, 01:5}
+    crowd: {17:2, 20:3, 22:5, 25:5},
+    img: "https://source.unsplash.com/400x300/?cocktail"
+  },
+  {
+    name: "Kvarnen",
+    type: "bar",
+    hours: "16.00 – 03.00",
+    info: "Historisk ölhall och nattklubb med livlig atmosfär.",
+    crowd: {17:2, 20:4, 22:5, 25:4},
+    img: "https://source.unsplash.com/400x300/?beer"
+  },
+  {
+    name: "Mosebacke",
+    type: "klubb",
+    hours: "17.00 – 03.00",
+    info: "Legendarisk scen med konserter och en fantastisk terrass.",
+    crowd: {17:1, 20:2, 22:4, 25:5},
+    img: "https://source.unsplash.com/400x300/?concert"
+  },
+  {
+    name: "Akkurat",
+    type: "bar",
+    hours: "16.00 – 02.00",
+    info: "Känd för sitt stora ölutbud och livemusik.",
+    crowd: {17:2, 20:3, 22:4, 25:3},
+    img: "https://source.unsplash.com/400x300/?pub"
   }
 ];
 
@@ -52,6 +85,7 @@ function renderVenues(filter="alla", query="") {
       const crowdLevel = v.crowd[selectedHour] || 2;
 
       card.innerHTML = `
+        <img src="${v.img}" alt="${v.name}">
         <h3>${v.name}</h3>
         <p class="muted">${v.type.toUpperCase()}</p>
         <p>Öppettider: ${v.hours}</p>
@@ -67,6 +101,7 @@ function renderVenues(filter="alla", query="") {
 function openModal(v) {
   modalBody.innerHTML = `
     <h2>${v.name}</h2>
+    <img src="${v.img}" alt="${v.name}" style="width:100%;border-radius:12px;margin-bottom:1rem;">
     <p><strong>Typ:</strong> ${v.type}</p>
     <p><strong>Öppettider:</strong> ${v.hours}</p>
     <p>${v.info}</p>
@@ -99,10 +134,12 @@ search.addEventListener("input", () => {
 
 // Tid-slider
 time.addEventListener("input", () => {
-  timeLabel.textContent = `${time.value}:00`;
+  timeLabel.textContent = formatHour(parseInt(time.value));
   const activeFilter = document.querySelector(".chip.active").dataset.filter;
   renderVenues(activeFilter, search.value);
 });
 
 // Init
+timeLabel.textContent = formatHour(parseInt(time.value));
 renderVenues();
+
