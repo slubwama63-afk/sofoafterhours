@@ -23,9 +23,6 @@
       </div>
 
       <label class="search" aria-label="Sök platser">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14Zm8.65 14.24-3.39-3.39" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
         <input id="search" type="search" placeholder="Sök klubb eller bar..." />
       </label>
     </div>
@@ -34,10 +31,10 @@
   <main>
     <div class="section-title">
       <h2>Klubbar & Barer</h2>
-      <div class="muted">Visa trängsel för kl. <span id="timeLabel">22:00</span></div>
+      <div class="muted">Trängsel vid <span id="timeLabel">22:00</span></div>
     </div>
 
-    <input id="time" type="range" min="17" max="3" step="1" value="22" style="width:100%" />
+    <input id="time" type="range" min="17" max="27" step="1" value="22" />
     <small class="muted">Dra för att se ungefär hur mycket folk det brukar vara vid olika tider.</small>
 
     <div id="grid" class="grid" aria-live="polite"></div>
@@ -64,4 +61,5 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
